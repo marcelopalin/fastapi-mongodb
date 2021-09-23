@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongo-dev
+    env_file: .env    
+    environment:
+      - MONGO_INITDB_DATABASE="mydb"
+    ports:
+      - 27017:27017
+    volumes:
+      - $HOME/.docker/database/dump_mongodb:/dump_mongodb
+      - $HOME/.docker/database/mongodb:/data/db      
+    restart: unless-stopped
+    networks:
+      - mongo-compose-network
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    ports:
+      - 8081:8081
+    env_file: .env
+    environment:
+      - ME_CONFIG_MONGODB_PORT=${DYANCONF_CONFIG_MONGODB_PORT}
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    depends_on:
+      - mongodb      
+    networks:
+      - mongo-compose-network
+    restart: always
+
+
+networks: 
+    mongo-compose-network:
+      driver: bridge
+   

@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "fastapi-mongodb"
+version = "0.1.0"
+description = "FastAPI with MongoDB"
+authors = ["Marcelo Facio Palin <palinrp@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pymongo = "^3.12.0"
+fastapi = {extras = ["all"], version = "^0.68.1"}
+dynaconf = "^3.1.7"
+loguru = "^0.5.3"
+requests = "^2.26.0"
+gunicorn = "^20.1.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

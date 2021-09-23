@@ -1,0 +1,29 @@
+[default]
+# see at https://www.dynaconf.com/#on-env-vars
+CURRENT_ENV = "@jinja {{this.current_env | lower}}" # development or production
+HOME_DIR = "@jinja {{env.HOME}}"
+DIR_INPUT="Entrada"
+DIR_OUTPUT="Saida"
+URL_CHECK_PUBLIC_IP = "https://ifconfig.me"
+DEBUG = true
+
+APP_NAME="API FastAPI! 🚀"
+APP_VERSAO="1.0.0"
+APP_DESCRIPTION="API with MongoDB! 🇧🇷"
+
+# MONGODB
+MONGO_ROOT_USER="admin"
+MONGO_ROOT_PASS="changeme"
+MONGO_HOST="localhost"
+MONGO_PORT=27017
+MONGO_DB="dev-db"
+
+# export MONGODB_URI="mongodb://admin:changeme@localhost:27017/mydb"
+MONGODB_URI="@jinja mongodb://{{env.DYANCONF_MONGO_ROOT_USER}}:{{env.DYANCONF_MONGO_ROOT_PASS}}@{{env.MONGO_HOST}}:{{env.DYANCONF_MONGO_PORT}}/{{env.MONGO_DB}}?authSource=admin"
+
+
+[development]
+RUN_S00=false
+
+[production]
+RUN_S00=true
