@@ -1,6 +1,27 @@
 {
     "configurations": [
         {
+            "name": "FastAPI: main",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": ["app.main:app","--reload", "--port", "5000"]
+        },
+        {
+            "name": "FastAPI: Other Parameters",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": ["app.main:app","--reload", "--host", "0.0.0.0", "--port", "5000"]
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },     
+        {
             "name": "Docker: Python - Fastapi",
             "type": "docker",
             "request": "launch",

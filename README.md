@@ -77,6 +77,53 @@ DEVELOPMENT<dict> {'RUN_S00': False}
 PRODUCTION<dict> {'RUN_S00': True}
 ```
 
+Fill options in `.secrets.toml`:
+
+```s
+[default]
+MONGODB_URI="@jinja mongodb://{{this.MONGO_ROOT_USER}}:{{this.MONGO_ROOT_PASS}}@{{this.MONGO_HOST}}:{{this.MONGO_PORT}}/{{this.MONGO_DB}}?authSource=admin"
+
+# Change development or production on .env
+[development]
+aws_access_key_id = ''
+aws_secret_access_key = ''
+telegram_token = ""
+telegram_chat_id = 0
+SMTP_HOST = ""
+SMTP_PORT = "587"
+SMTP_USER = ""
+SMTP_PASSWORD = ""
+SMTP_MSG_FROM = ''
+
+MONGO_ROOT_USER="admin"
+MONGO_ROOT_PASS="changeme"
+MONGO_HOST="localhost"
+MONGO_PORT=27017
+MONGO_DB="dev-db"
+# RESULT MONGODB_URI = "mongodb://admin:changeme@localhost:27017/dev-db?authSource=admin"
+
+# Change development or production on .env
+[production]
+aws_access_key_id = ''
+aws_secret_access_key = ''
+telegram_token = ""
+telegram_chat_id = 0
+SMTP_HOST = ""
+SMTP_PORT = "587"
+SMTP_USER = ""
+SMTP_PASSWORD = ""
+SMTP_MSG_FROM = ''
+
+MONGO_ROOT_USER="admin_prod"
+MONGO_ROOT_PASS="changeme"
+MONGO_HOST="localhost"
+MONGO_PORT=27017
+MONGO_DB="dev-db"
+# RESULT MONGODB_URI = "mongodb://admin_prod:changeme@localhost:27017/prod-db?authSource=admin"
+```
+
+Atention: Don't forget to add .secrets.toml on .gitignore.
+
 # How to Create DockerFile wih VSCode
 
 https://towardsdatascience.com/the-nice-way-to-use-docker-with-vscode-f475c49aab1b
@@ -141,3 +188,10 @@ https://medium.com/rahasak/enable-mongodb-authentication-with-docker-1b9f7d405a9
 
 
 https://medium.com/1mgofficial/how-to-override-uvicorn-logger-in-fastapi-using-loguru-124133cdcd4e
+
+Tips:
+https://gdevops.gitlab.io/tuto_git/tools/pre-commit/pre-commit.html
+
+https://www.architecture-performance.fr/ap_blog/some-pre-commit-git-hooks-for-python/
+
+https://towardsdatascience.com/pre-commit-hooks-you-must-know-ff247f5feb7e
