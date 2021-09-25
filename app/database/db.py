@@ -1,5 +1,7 @@
+import os
 from pymongo import MongoClient
 from dynaconf import Dynaconf
+import motor.motor_asyncio
 settings = Dynaconf(
     envvar_prefix="DYNACONF",
     settings_files=["settings.toml", ".secrets.toml"],
@@ -8,7 +10,10 @@ settings = Dynaconf(
     dotenv_path="app/.env",
 )
 
+
+client = motor.motor_asyncio.AsyncIOMotorClient(settings.MONGODB_URI)
+db = client[settings.MONGO_DB]
+
 if settings.DEBUG:
  print(f"Connecting.. {settings.MONGODB_URI}")
-client = MongoClient(settings.MONGODB_URI)
-conn = client[settings.MONGO_DB]
+

@@ -6,7 +6,7 @@ from app.config import settings
 import logging
 from app.src.custom_logging import CustomizeLogger
 
-from app.routes.user import router
+from app.routes import user, student
 
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, ORJSONResponse
@@ -47,7 +47,8 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
-app.include_router(router)
+app.include_router(user.router)
+app.include_router(student.router)
 
 if __name__ == '__main__':
       uvicorn.run(app, port=8009)
